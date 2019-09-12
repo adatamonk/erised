@@ -31,7 +31,11 @@ Change into the cloned directory and run the build command replacing "YOUR_HOSTN
 
 `docker-compose build --build-arg ERISEDHOST=YOUR_HOSTNAME --build-arg ERISEDEMAIL=YOUR_EMAIL`
 
+Note: sub-domains are not supported
+
 Once this is done run 
+
+`docker swarm init`
 
 `docker-compose up -d`
 
