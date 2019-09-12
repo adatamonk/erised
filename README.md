@@ -14,14 +14,42 @@ This group of containers will accept incoming DNS-over-TLS (DoH) requests, pass 
 
 Before deploying this you'll need to:
 
+* get a KVM (or dedicated) server running Debian 9
 * install [Docker](https://docs.docker.com/install/)
 * install [Docker Compose](https://docs.docker.com/install/)
 * Get a DNS A or AAAA record pointing to your server's IP
 * Open port 853 and 80 on your firewall (80 to get a certificate, and 853 for the actual service) 
 
+## Server Prep
+
+System & Dependencies:
+`apt update && apt upgrade -y`
+`apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common tmux apache2-utils ufw`
+
+UFW:
+`ufw allow OpenSSH`
+`ufw allow http`
+`ufw allow https`
+`ufw allow 8080/tcp`
+`ufw allow 853/tcp`
+`ufw enable`
+
+Docker:
+`curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -`
+`add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"`
+`apt update`
+`apt-cache policy docker-ce`
+`apt install docker-ce`
+
+Docker Compose:
+`curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose`
+`chmod +x /usr/local/bin/docker-compose`
+
 ## Deploying
 
 Once you have all this, clone this repo
+
+`cd /opt/`
 
 `git clone https://github.com/eldridgea/erised.git`
 
@@ -31,7 +59,7 @@ Change into the cloned directory and run the build command replacing "YOUR_HOSTN
 
 `docker-compose build --build-arg ERISEDHOST=YOUR_HOSTNAME --build-arg ERISEDEMAIL=YOUR_EMAIL`
 
-Note: sub-domains are not supported
+**Note: sub-domains are not supported
 
 Once this is done run 
 
