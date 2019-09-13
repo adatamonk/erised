@@ -15,8 +15,8 @@ This group of containers will accept incoming DNS-over-TLS (DoH) requests, pass 
 Before deploying this you'll need to:
 
 * get a KVM (or dedicated) server running Debian 9
-* install [Docker](https://docs.docker.com/install/)
-* install [Docker Compose](https://docs.docker.com/install/)
+* install [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-debian-9)
+* install [Docker Compose](https://docs.docker.com/compose/install/)
 * Get a DNS A or AAAA record pointing to your server's IP
 * Open port 853 and 80 on your firewall (80 to get a certificate, and 853 for the actual service) 
 
